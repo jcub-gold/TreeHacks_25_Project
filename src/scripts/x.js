@@ -26,6 +26,7 @@ function extractTweets() {
                 console.error("⚠️ Message send failed:", chrome.runtime.lastError);
             } else {
                 console.log("📨 Sent tweets to background.js, awaiting API response...");
+                console.log("📩 Response from background.js:", response);
             }
         });
     } else {

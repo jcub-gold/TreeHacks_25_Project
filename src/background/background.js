@@ -8,6 +8,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Validate that tweets are present
         if (!Array.isArray(message.tweets) || message.tweets.length === 0) {
             console.warn("⚠️ No valid tweets received.");
+            sendResponse({ status: "error", message: "No valid tweets received." });
             return;
         }
 
@@ -18,7 +19,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         analyzeTweets(message.tweets)
             .then(results => {
                 console.log("✅ API Response:", results);
+                sendResponse({ status: "success", results: results });
+            })
+            .catch(error => {
+                console.error("❌ API Error:", error);
+                sendResponse({ status: "error", message: error.message });
             });
+
+        return true; // Keeps the messaging channel open for async responses
     }
 
     if (message.action === "checkConnection") {
@@ -38,4 +46,5 @@ async function analyzeTweets(tweets, retries = 3) {
 // Listen for extension button click
 chrome.action.onClicked.addListener((tab) => {
     console.log("🔘 Extension button clicked");
+    chrome.tabs.sendMessage(tab.id, { action: "extractTweets" });
 });
