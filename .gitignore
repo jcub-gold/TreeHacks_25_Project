@@ -8,6 +8,7 @@ __pycache__/
 
 src/scripts/x_copy.js
 src/background/background_copy.js
+src/background/index.js
 
 # Distribution / packaging
 .Python
