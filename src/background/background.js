@@ -11,8 +11,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return;
         }
 
-        // Log the first tweet: GETTING THE FIRST ONE IS NICE BUT IF IT IS A TWEET REPLY, 
-        // IT SHOULD EXTRACT THE SECOND TWEET AND IF POSSIBLE ADD CONTEXT FROM THE FIRST ONE
+        // Log the first tweet
         console.log("🐦 First tweet:", message.tweets[0]);
 
         // Simulate sending tweets to the API for analysis
@@ -39,5 +38,4 @@ async function analyzeTweets(tweets, retries = 3) {
 // Listen for extension button click
 chrome.action.onClicked.addListener((tab) => {
     console.log("🔘 Extension button clicked");
-    chrome.tabs.sendMessage(tab.id, { action: "extractTweets" });
 });
