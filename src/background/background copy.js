@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Send tweets to the API for analysis
         analyzeTweets(message.tweets)
             .then(results => {
-                console.log("✅ API Response:", results);
+                console.log("✅ API Response!", results);
 
                 // Send analyzed results back to content script
                 chrome.tabs.sendMessage(sender.tab.id, { 
