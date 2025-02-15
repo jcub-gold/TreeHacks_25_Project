@@ -20,8 +20,9 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
-  },
-  "background": {
+    },
+      "host_permissions": ["https://api.perplexity.ai/*"],
+    "background": {
       "service_worker": "src/background/background.js",
       "type": "module"
   },
