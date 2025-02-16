@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("verifyIcon").src = chrome.runtime.getURL("icons/verifyicon.png");
+});
+
+
 document.getElementById('startButton').addEventListener('click', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     

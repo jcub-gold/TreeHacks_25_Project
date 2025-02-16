@@ -26,5 +26,11 @@
           "matches": ["https://x.com/*"],
           "js": ["src/scripts/x.js"]
       }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/verifyicon.png"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

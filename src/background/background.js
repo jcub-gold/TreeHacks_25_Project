@@ -1,5 +1,5 @@
 console.log("📡 Background script loaded!");
-const API_KEY = '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';
+const API_KEY = '';
 
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
