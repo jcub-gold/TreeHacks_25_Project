@@ -27,6 +27,9 @@ function extractTweets() {
             } else {
                 console.log("📨 Sent tweets to background.js, awaiting API response...");
                 console.log("📩 Response from background.js:", response);
+
+                // Send the response to the popup
+                chrome.runtime.sendMessage({ action: "displayResults", results: response.results });
             }
         });
     } else {

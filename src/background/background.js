@@ -40,7 +40,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Function to call the fact-checking API with a retry mechanism
 async function analyzeTweets(tweets, retries = 3) {
     console.log("🔄 Simulating sending tweets to API for analysis...");
-    return [];
+    const simulated_response = {
+        probability_fake: Math.random().toFixed(2), // Generates a random value between 0 and 1
+        sources: [
+            "https://www.fakenewsnetwork.com/article123",
+            "https://www.suspicioussource.net/story456",
+            "https://www.unreliablesite.com/post789"
+        ]
+    };
+    return simulated_response;
 }
 
 // Listen for extension button click
