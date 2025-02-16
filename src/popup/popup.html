@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>FeedCheck Popup</title>
-    <style>
-        body {
-            width: 200px;
-            padding: 10px;
-        }
-        button {
-            width: 100%;
-            margin: 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact-Check Main</title>
+  <link rel="stylesheet" href="main_styles.css">
 </head>
 <body>
-    <button id="extractTweets">Verify Tweet</button>
-    <script src="popup.js"></script>
+  <div class="main-container">
+    <div class="main-card">
+      
+      <!-- Centered Logo + "Likely True" + 85% -->
+      <div class="main-header">
+        <div class="main-logo">
+          <img class="status-icon" src="icons/likely_true.png" alt="Status Icon" />
+        </div>
+        <span class="truth-status">Likely True</span>
+        <span class="truth-percent">85%</span>
+      </div>
+
+      <!-- Single bar container (80% wide), 
+           with a static track at 100% + an animated bar on top -->
+      <div class="bar-container">
+        <div class="static-track"></div>   <!-- 100% wide track -->
+        <div class="main-bar"></div>       <!-- Animated bar expands left→right -->
+      </div>
+
+      <!-- Sources will be populated from background.js -->
+      <div class="main-sources">
+        <!-- Dynamic source links will be inserted here -->
+      </div>
+
+      <!-- Footer: Expand More button -->
+      <div class="main-footer">
+        <button class="expand-btn">Expand More</button>
+      </div>
+
+    </div>
+  </div>
+  <script src="popup.js"></script>
 </body>
 </html>
