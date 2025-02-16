@@ -1,0 +1,288 @@
+/*=============== RESET & BASE STYLES ===============*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Dark background + center layout */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #121212;
+    color: #ffffff;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/*=============== MAIN CARD (Rectangular outer box) ===============*/
+.main-card {
+    width: 600px; /* Increase the width */
+    padding: 20px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    /* Outer box is purely rectangular (no border-radius) */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/*=============== HEADER (Centered) ===============*/
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Larger logo container (70x70) */
+.main-logo {
+    width: 70px;
+    height: 70px;
+    background: #2a2a2a;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon {
+    width: 100px; 
+    height: 100px;
+    object-fit: contain;
+}
+
+/* "Likely True" + "85%" text, centered below the logo */
+.truth-status {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: hsl(92, 90%, 68%); /* green color */
+}
+
+.truth-percent {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+}
+
+/*=============== BAR SECTION ===============*/
+/* A container 80% wide, centered horizontally, 
+   with a static track behind an animated bar */
+.bar-container {
+    width: 80%;
+    height: 10px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin: 15px auto;
+}
+
+/* Static track is 100% of .bar-container, does not move */
+.static-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2a2a2a;
+}
+
+/* The animated bar starts at width: 0%, expands to 85% from left→right in 3s */
+.main-bar {
+    position: relative;
+    width: 0%;
+    height: 100%;
+    background: hsl(92, 90%, 68%);
+    transition: width 1s ease-in-out, background 1s ease-in-out;
+}
+
+/* Single smooth transition from red(0%) → green(85%) in 3s */
+@keyframes smoothRedToGreen {
+    0% {
+        width: 0%;
+        background: hsl(7, 89%, 46%);
+    }
+    100% {
+        width: 85%;
+        background: hsl(92, 90%, 68%);
+    }
+}
+
+/* Loading Animation */
+@keyframes loadingPulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.loading .main-bar {
+    width: 100%;
+    background: #444;
+    animation: loadingPulse 1.5s infinite;
+}
+
+/*=============== 3 SOURCE LINKS ===============*/
+.main-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.source-link {
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #0066cc;
+    background: #2a2a2a;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: left; /* Align text to the left */
+    height: 26px;
+}
+
+/*=============== FOOTER ===============*/
+.main-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Expand More ~100x30 with slight corners */
+.expand-btn {
+    width: 100px;
+    height: 30px;
+    background: #2a2a2a;
+    color: #fff;
+    border: none;
+    border-radius: 5px; 
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.expand-btn:hover {
+    background: #444;
+}
+
+/*=============== ADDITIONAL INFORMATION ===============*/
+.additional-info {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #cccccc;
+    text-align: center;
+}
+
+/* Truth Status Colors */
+.truth-status.likely-true {
+    color: hsl(92, 90%, 68%);
+}
+
+.truth-status.uncertain {
+    color: hsl(45, 90%, 68%);
+}
+
+.truth-status.likely-false {
+    color: hsl(7, 89%, 46%);
+}
+
+.gauge-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.gauge-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 8px solid #2a2a2a;
+    border-radius: 50%;
+}
+
+.gauge-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    mask: radial-gradient(transparent 59%, white 60%);
+    -webkit-mask: radial-gradient(transparent 59%, white 60%);
+    animation: fillGauge 1s ease-out forwards;
+}
+
+@keyframes fillGauge {
+    from {
+        background: conic-gradient(transparent 0deg, transparent 360deg);
+    }
+    to {
+        background: var(--final-gradient);
+    }
+}
+
+.gauge-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    z-index: 2;
+}
+
+.truth-status {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.truth-percent {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.summary-section {
+    padding: 15px;
+    margin: 15px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Gauge fill colors with transitions */
+.gauge-fill.likely-true {
+    background: conic-gradient(hsl(92, 90%, 68%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
+}
+
+.gauge-fill.uncertain {
+    background: conic-gradient(hsl(45, 90%, 68%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
+}
+
+.gauge-fill.likely-false {
+    background: conic-gradient(hsl(7, 89%, 46%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
+}

@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>FeedCheck Popup</title>
-    <style>
-        body {
-            width: 200px;
-            padding: 10px;
-        }
-        button {
-            width: 100%;
-            margin: 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact-Check Main</title>
+  <link rel="stylesheet" href="main_styles.css">
 </head>
 <body>
-    <button id="extractTweets">Verify Tweet</button>
-    <script src="popup.js"></script>
+  <div class="main-container">
+    <div class="main-card">
+
+      
+      <!-- Centered Logo + Status + Percentage -->
+      <div class="main-header">
+        <div class="gauge-container">
+          <div class="gauge-background"></div>
+          <div class="gauge-fill"></div>
+          <div class="gauge-content">
+            <span class="truth-status">Analyzing...</span>
+            <span class="truth-percent"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sources will be populated from background.js -->
+      <div class="main-sources">
+        <!-- Dynamic source links will be inserted here -->
+      </div>
+
+      <div class="summary-section">
+        <!-- Summary will be inserted here -->
+      </div>
+
+    </div>
+  </div>
+  <script src="popup.js"></script>
 </body>
 </html>

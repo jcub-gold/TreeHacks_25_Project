@@ -19,6 +19,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         analyzeTweets(message.tweets)
             .then(results => {
                 console.log("✅ API Response:", results);
+                // Send results to popup
+                chrome.runtime.sendMessage({
+                    action: "analysisComplete",
+                    results: results
+                });
                 sendResponse({ status: "success", results: results });
             })
             .catch(error => {
@@ -39,9 +44,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 // Function to call the fact-checking API with a retry mechanism
 async function analyzeTweets(tweets, retries = 3) {
-    console.log("🔄 Simulating sending tweets to API for analysis...");
-    return [];
-}
+        console.log("🔄 Simulating sending tweets to API for analysis...");
+    
+        // Simulate a delay of 5 seconds
+        await new Promise(resolve => setTimeout(resolve, 2000));
+    
+        const simulated_response = {
+            probability_fake: Math.random().toFixed(2), // Generates a random value between 0 and 1
+            sources: [
+                "https://www.fakenewsnetwork.com/article123",
+                "https://www.suspicioussource.net/story456",
+                "https://www.unreliablesite.com/post789"
+            ],
+            summary: "This is a summary of the tweets Aas;ldkfjasd;lkfja;lsdkfgjba;lidofhbjoipawejklfdszopivj;eaklwfopi;kjslaew;rgiolsfadhjkia;hlke ak;lesdfj;alksdjfgh;aoijweghrfsiogljhkawerfgdilkjanfd;ak e;lkjew ;OIAKLJDSFGA;LKFGJH;ALHJF;AOIJDF;AILKSDFJ"
+        };
+        return simulated_response;
+    }
 
 // Listen for extension button click
 chrome.action.onClicked.addListener((tab) => {
