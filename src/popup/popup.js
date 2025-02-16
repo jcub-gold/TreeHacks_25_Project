@@ -128,6 +128,7 @@ function displayResults(results) {
         link.href = source;
         link.className = 'source-link';
         link.textContent = `🔗 Source ${index + 1}: ${source}`;
+        link.target = "_blank";
         mainSources.appendChild(link);
     });
 
@@ -231,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const link = document.createElement('a');
                 link.href = source;
                 link.className = 'source-link';
+                link.target = "_blank";
                 
                 try {
                     const url = new URL(source);
