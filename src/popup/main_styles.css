@@ -80,34 +80,30 @@ body {
 /* A container 80% wide, centered horizontally, 
    with a static track behind an animated bar */
 .bar-container {
-    width: 80%;          
-    margin: 0 auto;      
-    position: relative;  
-    height: 25px;        
+    width: 80%;
+    height: 10px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin: 15px auto;
 }
 
 /* Static track is 100% of .bar-container, does not move */
 .static-track {
     position: absolute;
-    top: 0; 
-    left: 0;
     width: 100%;
-    height: 25px;
-    border-radius: 15px;
-    background: #2a2a2a; /* dark track color */
+    height: 100%;
+    background: #2a2a2a;
 }
 
 /* The animated bar starts at width: 0%, expands to 85% from left→right in 3s */
 .main-bar {
-    position: absolute;
-    top: 0; 
-    left: 0;
+    position: relative;
     width: 0%;
-    height: 25px;
-    border-radius: 15px; 
-    background: hsl(7, 89%, 46%); /* start red */
-    animation: smoothRedToGreen 3s ease-in-out forwards;
-    z-index: 1; /* above the track */
+    height: 100%;
+    background: hsl(92, 90%, 68%);
+    transition: width 1s ease-in-out, background 1s ease-in-out;
 }
 
 /* Single smooth transition from red(0%) → green(85%) in 3s */
@@ -120,6 +116,25 @@ body {
         width: 85%;
         background: hsl(92, 90%, 68%);
     }
+}
+
+/* Loading Animation */
+@keyframes loadingPulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.loading .main-bar {
+    width: 100%;
+    background: #444;
+    animation: loadingPulse 1.5s infinite;
 }
 
 /*=============== 3 SOURCE LINKS ===============*/
@@ -169,4 +184,105 @@ body {
     font-size: 0.9rem;
     color: #cccccc;
     text-align: center;
+}
+
+/* Truth Status Colors */
+.truth-status.likely-true {
+    color: hsl(92, 90%, 68%);
+}
+
+.truth-status.uncertain {
+    color: hsl(45, 90%, 68%);
+}
+
+.truth-status.likely-false {
+    color: hsl(7, 89%, 46%);
+}
+
+.gauge-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.gauge-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 8px solid #2a2a2a;
+    border-radius: 50%;
+}
+
+.gauge-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    mask: radial-gradient(transparent 59%, white 60%);
+    -webkit-mask: radial-gradient(transparent 59%, white 60%);
+    animation: fillGauge 1s ease-out forwards;
+}
+
+@keyframes fillGauge {
+    from {
+        background: conic-gradient(transparent 0deg, transparent 360deg);
+    }
+    to {
+        background: var(--final-gradient);
+    }
+}
+
+.gauge-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    z-index: 2;
+}
+
+.truth-status {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.truth-percent {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.summary-section {
+    padding: 15px;
+    margin: 15px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Gauge fill colors with transitions */
+.gauge-fill.likely-true {
+    background: conic-gradient(hsl(92, 90%, 68%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
+}
+
+.gauge-fill.uncertain {
+    background: conic-gradient(hsl(45, 90%, 68%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
+}
+
+.gauge-fill.likely-false {
+    background: conic-gradient(hsl(7, 89%, 46%) var(--angle), transparent var(--angle));
+    transition: background 1.5s ease-in-out;
 }

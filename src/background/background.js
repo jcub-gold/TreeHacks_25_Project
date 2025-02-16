@@ -47,7 +47,7 @@ async function analyzeTweets(tweets, retries = 3) {
         console.log("🔄 Simulating sending tweets to API for analysis...");
     
         // Simulate a delay of 5 seconds
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
     
         const simulated_response = {
             probability_fake: Math.random().toFixed(2), // Generates a random value between 0 and 1
@@ -56,7 +56,7 @@ async function analyzeTweets(tweets, retries = 3) {
                 "https://www.suspicioussource.net/story456",
                 "https://www.unreliablesite.com/post789"
             ],
-            summary: "This is a summary of the tweets"
+            summary: "This is a summary of the tweets Aas;ldkfjasd;lkfja;lsdkfgjba;lidofhbjoipawejklfdszopivj;eaklwfopi;kjslaew;rgiolsfadhjkia;hlke ak;lesdfj;alksdjfgh;aoijweghrfsiogljhkawerfgdilkjanfd;ak e;lkjew ;OIAKLJDSFGA;LKFGJH;ALHJF;AOIJDF;AILKSDFJ"
         };
         return simulated_response;
     }

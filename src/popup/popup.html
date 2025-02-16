@@ -9,21 +9,18 @@
 <body>
   <div class="main-container">
     <div class="main-card">
-      
-      <!-- Centered Logo + "Likely True" + 85% -->
-      <div class="main-header">
-        <div class="main-logo">
-          <img class="status-icon" src="icons/likely_true.png" alt="Status Icon" />
-        </div>
-        <span class="truth-status">Likely True</span>
-        <span class="truth-percent">85%</span>
-      </div>
 
-      <!-- Single bar container (80% wide), 
-           with a static track at 100% + an animated bar on top -->
-      <div class="bar-container">
-        <div class="static-track"></div>   <!-- 100% wide track -->
-        <div class="main-bar"></div>       <!-- Animated bar expands left→right -->
+      
+      <!-- Centered Logo + Status + Percentage -->
+      <div class="main-header">
+        <div class="gauge-container">
+          <div class="gauge-background"></div>
+          <div class="gauge-fill"></div>
+          <div class="gauge-content">
+            <span class="truth-status">Analyzing...</span>
+            <span class="truth-percent"></span>
+          </div>
+        </div>
       </div>
 
       <!-- Sources will be populated from background.js -->
@@ -31,9 +28,8 @@
         <!-- Dynamic source links will be inserted here -->
       </div>
 
-      <!-- Footer: Expand More button -->
-      <div class="main-footer">
-        <button class="expand-btn">Expand More</button>
+      <div class="summary-section">
+        <!-- Summary will be inserted here -->
       </div>
 
     </div>
