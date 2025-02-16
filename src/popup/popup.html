@@ -4,18 +4,24 @@
     <title>FeedCheck Popup</title>
     <style>
         body {
-            width: 200px;
+            width: 400px; /* Increase the width */
+            height: 400px; /* Increase the height */
             padding: 10px;
         }
         button {
             width: 100%;
             margin: 5px 0;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <button id="extractTweets">Verify Tweet</button>
-    <div id="resultsContainer"></div>
+    <div id="verifyContainer">
+        <button id="extractTweets">Verify Tweet</button>
+    </div>
+    <div id="resultsContainer" class="hidden"></div>
     <script src="popup.js"></script>
 </body>
 </html>

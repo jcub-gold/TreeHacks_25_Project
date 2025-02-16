@@ -15,15 +15,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Log the first tweet
         console.log("🐦 First tweet:", message.tweets[0]);
 
+        // Notify popup to display loading screen
+        console.log("🔄 Notifying popup to display loading screen...");
+        chrome.runtime.sendMessage({ action: "showLoading" });
+
         // Simulate sending tweets to the API for analysis
         analyzeTweets(message.tweets)
             .then(results => {
                 console.log("✅ API Response:", results);
                 sendResponse({ status: "success", results: results });
+
+                // Notify popup to display results
+                console.log("🔄 Notifying popup to display results...");
+                chrome.runtime.sendMessage({ action: "displayResults", results: results });
             })
             .catch(error => {
                 console.error("❌ API Error:", error);
                 sendResponse({ status: "error", message: error.message });
+
+                // Notify popup to display error
+                console.log("🔄 Notifying popup to display error...");
+                chrome.runtime.sendMessage({ action: "displayError", message: error.message });
             });
 
         return true; // Keeps the messaging channel open for async responses
@@ -40,6 +52,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Function to call the fact-checking API with a retry mechanism
 async function analyzeTweets(tweets, retries = 3) {
     console.log("🔄 Simulating sending tweets to API for analysis...");
+
+    // Simulate a delay of 5 seconds
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
     const simulated_response = {
         probability_fake: Math.random().toFixed(2), // Generates a random value between 0 and 1
         sources: [
