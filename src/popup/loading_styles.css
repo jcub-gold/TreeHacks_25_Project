@@ -1,156 +1,184 @@
 /*=============== RESET & BASE STYLES ===============*/
 * {
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Dark background + center layout */
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #121212;
-    color: #ffffff;
-  }
-  
-  .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  
-  /*=============== LOADING CARD (Rectangular outer box) ===============*/
-  .loading-card {
-    width: 500px; /* Increase the width */
-    padding: 20px;
-    background: #1e1e1e;
-    border: 1px solid #333;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
-  
-  /*=============== HEADER (Centered, Matches main) ===============*/
-  .loading-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  /* Larger Logo Placeholder (70x70) */
-  .loading-logo {
-    width: 100px;
-    height: 100px;
-    background: #2a2a2a;
-    border-radius: 50%; /* circle inside */
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Placeholder for "Likely True" bigger text */
-  .loading-title {
-    width: 100px;
-    height: 16px;
-    background: #2a2a2a;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* Placeholder for "85%" below the title */
-  .loading-number {
-    width: 40px;
-    height: 14px;
-    background: #2a2a2a;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /*=============== SINGLE BIGGER BAR PLACEHOLDER (20px) ===============*/
-  .loading-bar-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .loading-bar {
-    width: 80%;  
-    height: 20px;
-    background: #2a2a2a;
-    border-radius: 15px; /* same shape as main bar */
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /*=============== 3 SOURCE LINK PLACEHOLDERS (Matches main) ===============*/
-  .loading-sources {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .loading-link {
-    width: 100%;
-    height: 26px;
-    background: #2a2a2a;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /*=============== FOOTER (Expand Button Placeholder) ===============*/
-  .loading-footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .expand-btn-placeholder {
-    width: 100px;
-    height: 30px;
-    background: #2a2a2a;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /*=============== SHIMMER ANIMATION (Skeleton) ===============*/
-  .loading-logo::before,
-  .loading-title::before,
-  .loading-number::before,
-  .loading-bar::before,
-  .loading-link::before,
-  .expand-btn-placeholder::before {
-    content: "";
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(
-      to right,
-      #2a2a2a 0%,
-      rgba(255,255,255,0.05) 20%,
-      #2a2a2a 40%,
-      #2a2a2a 100%
-    );
-    background-repeat: no-repeat;
-    background-size: 450px 400px;
-    animation: shimmer 1s linear infinite;
-  }
-  
-  @keyframes shimmer {
-    0% {
-      background-position: -450px 0;
-    }
-    100% {
-      background-position: 450px 0;
-    }
-  }
-  
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #121212;
+  color: #ffffff;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/*=============== LOADING CARD (Rectangular Outer Box) ===============*/
+.loading-card {
+  width: 500px;
+  padding: 20px;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/*=============== HEADER (Centered) ===============*/
+.loading-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+/*=============== GAUGE CONTAINER ===============*/
+.gauge-container {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Single gauge ring with shimmering effect */
+.gauge-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 10px solid #2a2a2a;
+  background: transparent;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Shimmer effect applied to the gauge ring's border only */
+.gauge-ring::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    transparent 60%
+  );
+  animation: shimmer-side 1.8s linear infinite;
+  /* Mask out the center so only the border (approx. inner 50px radius) shimmers */
+  mask: radial-gradient(circle at center, transparent 50px, black 51px);
+  -webkit-mask: radial-gradient(circle at center, transparent 50px, black 51px);
+}
+
+/* Shimmer animation keyframes */
+@keyframes shimmer-side {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+/* Expanded gauge fill block (inner circle) */
+.gauge-fill {
+  width: 100px;
+  height: 100px;
+  background: #1e1e1e;
+  border-radius: 50%;
+  position: absolute;
+}
+
+/*=============== STATUS AND PERCENTAGE PLACEHOLDER ===============*/
+.gauge-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-placeholder {
+  width: 80px;
+  height: 16px;
+  background: #2a2a2a;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.percent-placeholder {
+  width: 50px;
+  height: 14px;
+  background: #2a2a2a;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+/*=============== LOADING SOURCES PLACEHOLDER ===============*/
+.loading-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.source-placeholder {
+  width: 100%;
+  height: 26px;
+  background: #2a2a2a;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+/*=============== INCREASED DESCRIPTION HEIGHT PLACEHOLDER ===============*/
+.summary-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.summary-placeholder {
+  width: 90%;
+  height: 130px; /* Extended vertical height */
+  background: #2a2a2a;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+/*=============== SHIMMER ANIMATION FOR TEXT & BOXES ===============*/
+.loading-placeholder::before,
+.source-placeholder::before,
+.summary-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    #2a2a2a 0%,
+    rgba(255,255,255,0.15) 30%,
+    #2a2a2a 60%,
+    #2a2a2a 100%
+  );
+  animation: shimmer 1.8s linear infinite;
+}
+
+/* Shimmer keyframes */
+@keyframes shimmer {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
