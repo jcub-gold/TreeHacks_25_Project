@@ -195,18 +195,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const gaugeFill = document.querySelector('.gauge-fill');
             const percentage = data.reliabilityPercentage;
             
-            // Set the color based on percentage
+            // Calculate the angle based on percentage
+            const finalAngle = (percentage / 100) * 360;
+            
+            // Determine the color based on percentage
             const gaugeColor = percentage >= 70 ? 'hsl(92, 90%, 68%)' : 
                              percentage >= 30 ? 'hsl(45, 90%, 68%)' : 
                              'hsl(7, 89%, 46%)';
-
-            // Immediately set the circle fill
-            const angle = (percentage / 100) * 360;
-            const finalGradient = `conic-gradient(
-                ${gaugeColor} ${angle}deg,
-                transparent ${angle}deg 360deg
-            )`;
-            gaugeFill.style.setProperty('--final-gradient', finalGradient);
+            
+            // Set both custom properties
+            gaugeFill.style.setProperty('--final-angle', `${finalAngle}deg`);
+            gaugeFill.style.setProperty('--gauge-color', gaugeColor);
 
             // Immediately set percentage and status
             if (truthPercent) {
